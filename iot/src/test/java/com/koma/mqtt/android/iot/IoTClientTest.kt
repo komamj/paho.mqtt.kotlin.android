@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.koma.mqtt.android.sample
+package com.koma.mqtt.android.iot
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.assertEquals
+import androidx.test.filters.SmallTest
+import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
+@SmallTest
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class IoTClientTest {
+    private lateinit var ioTClient: IoTClient
+
+    @Before
+    fun setUp() {
+        ioTClient = IoTClient.Builder().build()
+    }
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.koma.mqtt.android.sample", appContext.packageName)
+    fun should_return_60_when_not_set_keepAliveInterval() {
+        assertThat(ioTClient.keepAliveInterval).isEqualTo(60)
     }
 }

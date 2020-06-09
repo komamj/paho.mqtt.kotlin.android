@@ -1,2 +1,3 @@
+include ':iot'
 include ':app'
 rootProject.name = "Sample"
